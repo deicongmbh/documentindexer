@@ -1,3 +1,5 @@
+image: maven:latest
+
 # These are the default stages.
 # You don't need to explicitly define them.
 # But you could define any stages you want.
@@ -17,7 +19,7 @@ maven_build:
   # Of course, it is our duty to actually configure a runner
   # with the tag 'maven' and a working maven installation
   tags:
-    - maven
+    - docker
   # Here you can execute arbitrate terminal commands.
   # If any of the commands returns a non zero exit code the job fails.
   script:
