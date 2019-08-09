@@ -55,7 +55,9 @@ public class DirectoryIndexer {
         List<Document> result = new ArrayList<>();
         File dir = new File(dirName);
 
-        return Arrays.asList(dir.listFiles()).parallelStream().map(f -> f.isDirectory() ? parseFilesInDirectory(f.getAbsolutePath()) : this.parseFile(f)).flatMap(Collection::stream).filter(Objects::nonNull).collect(Collectors.toList());
+        return Arrays.asList(dir.listFiles()).parallelStream()
+        .map(f -> f.isDirectory() ? parseFilesInDirectory(f.getAbsolutePath()) : this.parseFile(f))
+        .flatMap(Collection::stream).filter(Objects::nonNull).collect(Collectors.toList());
 
     }
 
@@ -70,6 +72,7 @@ public class DirectoryIndexer {
         TesseractOCRConfig imageOcrConfig = new TesseractOCRConfig();
         parseContext.set(TesseractOCRConfig.class, imageOcrConfig);
 
+        /** This knows about most File formats like docx, pdf, svg, txt, etc. */
         Parser parser = new AutoDetectParser();
         LOG.info("Parsing " + fileName);
 
